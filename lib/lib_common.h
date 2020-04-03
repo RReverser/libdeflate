@@ -36,4 +36,17 @@ void libdeflate_free(void *ptr);
 void *libdeflate_aligned_malloc(size_t alignment, size_t size);
 void libdeflate_aligned_free(void *ptr);
 
+#ifdef FREESTANDING
+#define memset		SYM_FIXUP(memset)
+void *memset(void *s, int c, size_t n);
+
+#define memcpy		SYM_FIXUP(memcpy)
+void *memcpy(void *dest, const void *src, size_t n);
+
+#define memmove		SYM_FIXUP(memmove)
+void *memmove(void *dest, const void *src, size_t n);
+#else
+#include <string.h>
+#endif
+
 #endif /* LIB_LIB_COMMON_H */

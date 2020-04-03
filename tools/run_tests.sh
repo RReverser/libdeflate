@@ -173,6 +173,27 @@ native_tests() {
 	fi
 }
 
+# Test the library built with FREESTANDING=1.
+freestanding_tests() {
+	test_group_included freestanding || return 0
+
+	WRAPPER= native_build_and_test FREESTANDING=1
+	if nm libdeflate.so | grep ' U ' > "$TMPFILE"; then
+		echo 1>&2 "Freestanding lib links to external functions!:"
+		nm libdeflate.so | grep ' U '
+		return 1
+	fi
+
+	if have_valgrind; then
+		WRAPPER="$VALGRIND" native_build_and_test FREESTANDING=1
+	fi
+
+	if have_ubsan; then
+		WRAPPER= native_build_and_test FREESTANDING=1 \
+			CC=clang CFLAGS="$SANITIZE_CFLAGS"
+	fi
+}
+
 ###############################################################################
 
 checksum_benchmarks() {
@@ -361,6 +382,7 @@ log "	SMOKEDATA=$SMOKEDATA"
 log "	NDKDIR=$NDKDIR"
 
 native_tests
+freestanding_tests
 checksum_benchmarks
 android_tests
 mips_tests
