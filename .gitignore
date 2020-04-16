@@ -9,6 +9,7 @@
 *.obj
 *.so
 *.so.*
+*.dllobj
 /.lib-cflags
 /.prog-cflags
 /programs/config.h
