@@ -29,6 +29,7 @@
 #define PROGRAMS_TEST_UTIL_H
 
 #include "prog_util.h"
+#include <inttypes.h>
 
 #include <zlib.h> /* for comparison purposes */
 

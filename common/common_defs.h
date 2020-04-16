@@ -28,6 +28,9 @@
 #ifndef COMMON_COMMON_DEFS_H
 #define COMMON_COMMON_DEFS_H
 
+#include <stdint.h>
+#include <stddef.h> /* size_t */
+
 #ifdef __GNUC__
 #  include "compiler_gcc.h"
 #elif defined(_MSC_VER)
@@ -40,16 +43,11 @@
 /*                              Type definitions                              */
 /* ========================================================================== */
 
-#include <stddef.h> /* size_t */
-
 #ifndef __bool_true_false_are_defined
 #  include <stdbool.h> /* bool */
 #endif
 
 /* Fixed-width integer types */
-#ifndef PRIu32
-#  include <inttypes.h>
-#endif
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
