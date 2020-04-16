@@ -57,7 +57,7 @@ override CFLAGS :=							\
 FREESTANDING :=
 ifdef FREESTANDING
 override CPPFLAGS += -DFREESTANDING
-LIB_CFLAGS += -ffreestanding
+LIB_CFLAGS += -ffreestanding -nostdlib
 endif
 
 ##############################################################################
